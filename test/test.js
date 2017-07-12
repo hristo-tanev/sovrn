@@ -13,7 +13,7 @@ describe('From roman numeral to arabic number', () => {
       convertedValue: 30
     }
 
-    client.get('/roman/XXX', (error, request, response, object) => {
+    client.get('/roman/' + test.inputValue, (error, request, response, object) => {
       assert.equal(response.status, 200)
       assert.equal(object, test)
     })

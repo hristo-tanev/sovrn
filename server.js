@@ -15,13 +15,13 @@ server.get('/roman/:number', (request, response, next) => {
   let anumber = ''
   try {
     anumber = romanNumerals.toArabic(number.toUpperCase())
+    response.send({ inputValue: number, convertedValue: anumber })
   } catch(error) {
     if (error) {
       response.send(400)
     }
   }
 
-  response.send({ inputValue: number, convertedValue: anumber })
   return next()
 })
 

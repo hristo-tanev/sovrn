@@ -7,7 +7,7 @@ let client = clients.createJsonClient({
 
 client.get('/roman/XXX', (error, request, response, object) => {
   if (error) {
-    console.log('The number does not consist just of roman literals.')
+    console.log('The number is not a valid roman numeral.')
     return
   }
 

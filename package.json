@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "start": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/hristo-tanev/sovrn-roman-numerals#readme",
   "dependencies": {
+    "mocha": "^3.4.2",
     "restify": "^5.0.0",
-    "restify-clients": "^1.5.0"
+    "restify-clients": "^1.5.0",
+    "roman-numerals": "^0.3.2"
   }
 }

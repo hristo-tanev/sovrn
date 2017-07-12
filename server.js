@@ -1,6 +1,5 @@
 let restify = require('restify')
-
-let check = require('./utils/NumeralsCheck')
+let romanNumerals = require('roman-numerals')
 
 const server = restify.createServer({
   name: 'sovrn-roman-numericals',
@@ -13,11 +12,16 @@ server.use(restify.plugins.bodyParser())
 
 server.get('/roman/:number', (request, response, next) => {
   let { number } = request.params
-  if (!check.isRoman(number)) {
-    response.send(400)
+  let anumber = ''
+  try {
+    anumber = romanNumerals.toArabic(number.toUpperCase())
+  } catch(error) {
+    if (error) {
+      response.send(400)
+    }
   }
 
-  response.send({ inputValue: number })
+  response.send({ inputValue: number, convertedValue: anumber })
   return next()
 })
 

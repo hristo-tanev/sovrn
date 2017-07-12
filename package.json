@@ -1,0 +1,23 @@
+{
+  "name": "sovrn-roman-numerals",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hristo-tanev/sovrn-roman-numerals.git"
+  },
+  "author": "Hristo Tanev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hristo-tanev/sovrn-roman-numerals/issues"
+  },
+  "homepage": "https://github.com/hristo-tanev/sovrn-roman-numerals#readme",
+  "dependencies": {
+    "restify": "^5.0.0",
+    "restify-clients": "^1.5.0"
+  }
+}

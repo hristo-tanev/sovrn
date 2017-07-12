@@ -1,4 +1,5 @@
 let clients = require('restify-clients')
+
 let client = clients.createJsonClient({
   url: 'http://localhost:3000',
   version: '~1.0'

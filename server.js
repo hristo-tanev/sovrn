@@ -1,8 +1,17 @@
 let restify = require('restify')
 let romanNumerals = require('roman-numerals')
+let mongoose = require('mongoose')
+
+let Numeral = require('./models/Numeral')
+
+mongoose.connect('mongodb://localhost/sovrn')
+const db = mongoose.connection
+db.once('open', () => {
+  console.log('Connection on database now established.')
+})
 
 const server = restify.createServer({
-  name: 'sovrn-roman-numericals',
+  name: 'sovrn-roman-numerals',
   version: '1.0.0'
 })
 
@@ -12,9 +21,8 @@ server.use(restify.plugins.bodyParser())
 
 server.get('/roman/:number', (request, response, next) => {
   let { number } = request.params
-  let anumber = ''
   try {
-    anumber = romanNumerals.toArabic(number.toUpperCase())
+    const anumber = romanNumerals.toArabic(number.toUpperCase())
     response.send({ inputValue: number, convertedValue: anumber })
   } catch(error) {
     if (error) {

@@ -2,7 +2,7 @@ let restify = require('restify')
 let romanNumerals = require('roman-numerals')
 let mongoose = require('mongoose')
 
-let Numeral = require('./models/Numeral')
+let handleRoutes = require('./routes')
 
 mongoose.connect('mongodb://localhost/sovrn')
 const db = mongoose.connection
@@ -19,18 +19,6 @@ server.use(restify.plugins.acceptParser(server.acceptable))
 server.use(restify.plugins.queryParser())
 server.use(restify.plugins.bodyParser())
 
-server.get('/roman/:number', (request, response, next) => {
-  let { number } = request.params
-  try {
-    const anumber = romanNumerals.toArabic(number.toUpperCase())
-    response.send({ inputValue: number, convertedValue: anumber })
-  } catch(error) {
-    if (error) {
-      response.send(400)
-    }
-  }
-
-  return next()
-})
+handleRoutes(server)
 
 server.listen(3000)

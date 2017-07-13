@@ -7,7 +7,7 @@ describe('From roman numeral to arabic number', () => {
   it('the input roman numeral is valid and can be converted', (done) => {
     const test = {
       inputValue: 'XXX',
-      convertedValue: '40'
+      convertedValue: '30'
     }
 
     api.get(('/roman/' + test.inputValue))

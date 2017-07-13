@@ -20,7 +20,7 @@ const handleRoutes = (server) => {
           }
         }
       } else {
-        response.send({ inputValue: numeral[0].input_value, convertedValue: numeral[0].converted_value })
+        response.send({ inputValue: numeral.input_value, convertedValue: numeral.converted_value })
       }
     })
 

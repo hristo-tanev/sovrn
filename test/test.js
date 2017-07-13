@@ -1,27 +1,31 @@
-let assert = require('assert')
-let clients = require('restify-clients')
-
-let client = clients.createJsonClient({
-  url: 'http://localhost:3000',
-  version: '~1.0'
-})
+let should = require('chai').should()
+let expect = require('chai').expect
+let supertest = require('supertest')
+let api = supertest('http://localhost:3000')
 
 describe('From roman numeral to arabic number', () => {
-  it('the input roman numeral is valid and can be converted', () => {
-    let test = {
+  it('the input roman numeral is valid and can be converted', (done) => {
+    const test = {
       inputValue: 'XXX',
-      convertedValue: 30
+      convertedValue: '40'
     }
 
-    client.get('/roman/' + test.inputValue, (error, request, response, object) => {
-      assert.equal(response.status, 200)
-      assert.equal(object, test)
-    })
+    api.get(('/roman/' + test.inputValue))
+       .set('Accept', 'application/json')
+       .expect(200)
+       .end((error, response) => {
+         response.body.should.be.a('object')
+         response.body.should.have.property('inputValue')
+         response.body.should.have.property('convertedValue')
+         response.body.inputValue.should.equal(test.inputValue)
+         response.body.convertedValue.should.equal(test.convertedValue)
+         done()
+       })
   })
 
-  it('the input roman numeral is not valid and cannot be converted', () => {
-    client.get('/roman/XXXp', (error, request, response, object) => {
-      assert.equal(response.status, 400)
-    })
+  it('the input roman numeral is not valid and cannot be converted', (done) => {
+    api.get('/roman/XXXp')
+       .set('Accept', 'application/json')
+       .expect(400, done)
   })
 })

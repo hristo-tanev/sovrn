@@ -15,9 +15,7 @@ const handleRoutes = (server) => {
           n.save()
           response.send({ inputValue: number, convertedValue: anumber })
         } catch(error) {
-          if (error) {
-            response.send(400)
-          }
+          response.send(400)
         }
       } else {
         response.send({ inputValue: numeral.input_value, convertedValue: numeral.converted_value })

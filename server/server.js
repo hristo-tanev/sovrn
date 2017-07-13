@@ -1,6 +1,6 @@
 let restify = require('restify')
-let romanNumerals = require('roman-numerals')
 let mongoose = require('mongoose')
+let romanNumerals = require('roman-numerals')
 
 let handleRoutes = require('./routes')
 

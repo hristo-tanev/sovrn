@@ -37,6 +37,22 @@ const handleRoutes = (server) => {
 
     return next()
   })
+
+  server.get('/arabic/:number', (request, response, next) => {
+    let { number } = request.params
+    Numeral.findOne({ type: 'arabic', input_value: number }, (error, numeral) => {
+      if (error) {
+        response.send(400)
+      }
+
+      if (numeral == null) {
+        convertNumeral(response, 'arabic', number)
+      } else {
+        response.json({ inputValue: numeral.input_value, convertedValue: numeral.converted_value })
+      }
+    })
+    return next()
+  })
 }
 
 module.exports = handleRoutes

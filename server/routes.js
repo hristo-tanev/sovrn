@@ -1,3 +1,5 @@
+let romanNumerals = require('roman-numerals')
+
 let Numeral = require('../models/Numeral')
 
 const handleRoutes = (server) => {
@@ -11,14 +13,14 @@ const handleRoutes = (server) => {
       if (numeral == null) {
         try {
           const anumber = romanNumerals.toArabic(number.toUpperCase())
-          const n = new Numeral({ type: 'roman', input_value: number, converted_value: anumber })
+          const n = new Numeral({ type: 'roman', input_value: number, converted_value: anumber.toString() })
           n.save()
-          response.send({ inputValue: number, convertedValue: anumber })
+          response.json({ inputValue: number, convertedValue: anumber.toString() })
         } catch(error) {
           response.send(400)
         }
       } else {
-        response.send({ inputValue: numeral.input_value, convertedValue: numeral.converted_value })
+        response.json({ inputValue: numeral.input_value, convertedValue: numeral.converted_value })
       }
     })
 

@@ -3,7 +3,7 @@ let expect = require('chai').expect
 let supertest = require('supertest')
 let api = supertest('http://localhost:3000')
 
-describe('From roman numeral to arabic number', () => {
+describe('Serving GET /roman/:number', () => {
   it('the input roman numeral is valid and can be converted', (done) => {
     const test = {
       inputValue: 'XXX',
@@ -12,8 +12,9 @@ describe('From roman numeral to arabic number', () => {
 
     api.get(('/roman/' + test.inputValue))
        .set('Accept', 'application/json')
-       .expect(200)
+       .expect(400)
        .end((error, response) => {
+         response.status.should.equal(200)
          response.body.should.be.a('object')
          response.body.should.have.property('inputValue')
          response.body.should.have.property('convertedValue')

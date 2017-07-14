@@ -20,37 +20,32 @@ const convertNumeral = (response, type, numeral) => {
   }
 }
 
+const checkAndConvert = (response, type, number) => {
+  Numeral.findOne({ type, input_value: number }, (error, numeral) => {
+    if (error) {
+      response.send(400)
+    }
+
+    if (numeral == null) {
+      convertNumeral(response, type, number)
+    } else {
+      response.json({ inputValue: numeral.input_value, convertedValue: numeral.converted_value })
+    }
+  })
+}
+
 const handleRoutes = (server) => {
   server.get('/roman/:number', (request, response, next) => {
     let { number } = request.params
-    Numeral.findOne({ type: 'roman', input_value: number }, (error, numeral) => {
-      if (error) {
-        response.send(400)
-      }
-
-      if (numeral == null) {
-        convertNumeral(response, 'roman', number)
-      } else {
-        response.json({ inputValue: numeral.input_value, convertedValue: numeral.converted_value })
-      }
-    })
+    checkAndConvert(response, 'roman', number)
 
     return next()
   })
 
   server.get('/arabic/:number', (request, response, next) => {
     let { number } = request.params
-    Numeral.findOne({ type: 'arabic', input_value: number }, (error, numeral) => {
-      if (error) {
-        response.send(400)
-      }
+    checkAndConvert(response, 'arabic', number)
 
-      if (numeral == null) {
-        convertNumeral(response, 'arabic', number)
-      } else {
-        response.json({ inputValue: numeral.input_value, convertedValue: numeral.converted_value })
-      }
-    })
     return next()
   })
 }

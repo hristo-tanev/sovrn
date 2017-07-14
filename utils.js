@@ -47,5 +47,4 @@ const checkAndConvert = (response, type, number) => {
   })
 }
 
-module.exports = isValidArabic
 module.exports = checkAndConvert

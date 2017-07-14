@@ -1,4 +1,3 @@
-let isValidArabic = require('../utils')
 let checkAndConvert = require('../utils')
 
 const handleRoutes = (server) => {

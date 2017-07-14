@@ -12,7 +12,7 @@ describe('Serving GET /roman/:number', () => {
 
     api.get(('/roman/' + test.inputValue))
        .set('Accept', 'application/json')
-       .expect(400)
+       .expect(200)
        .end((error, response) => {
          response.status.should.equal(200)
          response.body.should.be.a('object')

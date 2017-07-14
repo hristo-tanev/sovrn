@@ -1,20 +1,24 @@
 let romanNumerals = require('roman-numerals')
 
 let Numeral = require('../models/Numeral')
+let isValidArabic = require('../utils')
 
 const convertNumeral = (response, type, numeral) => {
   let number = '', n = new Numeral()
   try {
     if (type == 'roman') {
       number = romanNumerals.toArabic(numeral.toUpperCase())
-      n = new Numeral({ type: 'roman', input_value: numeral, converted_value: number.toString() })
     } else {
-      number = romanNumerals.toRoman(numeral)
-      n = new Numeral({ type: 'arabic', input_value: numeral, converted_value: number.toString() })
+      number = romanNumerals.toRoman(numeral.toUpperCase())
     }
 
-    n.save()
-    response.json({ inputValue: numeral, convertedValue: number.toString() })
+    if (type == 'roman' || isValidArabic(numeral)) {
+      n = new Numeral({ type, input_value: numeral, converted_value: number.toString() })
+      n.save()
+      response.json({ inputValue: numeral, convertedValue: number.toString() })
+    } else {
+      response.send(400)
+    }
   } catch (error) {
     response.send(400)
   }

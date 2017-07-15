@@ -30,6 +30,7 @@ describe('Serving GET /all/:numeralType', () => {
 
   it('invalid numeral type is passed', (done) => {
     api.get('/all/ryurri')
+       .set('Accept', 'application/json')
        .expect(400, done)
   })
 })

@@ -12,6 +12,9 @@ const numeralTypeTest = (type, done) => {
        response.body.should.be.a('object')
        response.body.should.have.property('all')
        response.body.all.should.be.a('array')
+       response.body.all[0].should.have.property('_id')
+       response.body.all[0].should.have.property('input_value')
+       response.body.all[0].should.have.property('converted_value')
        done()
      })
 }
@@ -19,6 +22,10 @@ const numeralTypeTest = (type, done) => {
 describe('Serving GET /all/:numeralType', () => {
   it('numeral type is set to /roman', (done) => {
     numeralTypeTest('roman', done)
+  })
+
+  it('numeral type is set to /arabic', (done) => {
+    numeralTypeTest('arabic', done)
   })
 
   it('invalid numeral type is passed', (done) => {

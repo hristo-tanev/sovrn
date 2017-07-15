@@ -1,4 +1,5 @@
 let checkAndConvert = require('../utils')
+let Numeral = require('../models/Numeral')
 
 const handleRoutes = (server) => {
   server.get('/roman/:number', (request, response, next) => {
@@ -18,7 +19,13 @@ const handleRoutes = (server) => {
   server.get('/all/:numeralType', (request, response, next) => {
     let { numeralType } = request.params
     if (numeralType == 'roman' || numeralType == 'arabic') {
+      Numeral.find({ type: numeralType }, (error, numerals) => {
+        if (error) {
+          response.send(400)
+        }
 
+        response.json({ all: numerals })
+      })
     } else {
       response.send(400)
     }

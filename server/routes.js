@@ -14,6 +14,17 @@ const handleRoutes = (server) => {
 
     return next()
   })
+
+  server.get('/all/:numeralType', (request, response, next) => {
+    let { numeralType } = request.params
+    if (numeralType == 'roman' || numeralType == 'arabic') {
+
+    } else {
+      response.send(400)
+    }
+
+    return next()
+  })
 }
 
 module.exports = handleRoutes

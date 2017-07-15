@@ -13,6 +13,8 @@ const numeralTypeTest = (type, done) => {
        response.body.should.have.property('all')
        response.body.all.should.be.a('array')
        response.body.all[0].should.have.property('_id')
+       response.body.all[0].should.have.property('type')
+       response.body.all[0].type.should.equal(type)
        response.body.all[0].should.have.property('input_value')
        response.body.all[0].should.have.property('converted_value')
        done()

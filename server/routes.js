@@ -32,6 +32,19 @@ const handleRoutes = (server) => {
 
     return next()
   })
+
+  server.get('/remove/all', (request, response, next) => {
+    Numeral.remove({}, (error, numerals) => {
+      if (error) {
+        response.send(500)
+      }
+
+      console.log(numerals)
+    })
+
+    response.send(200)
+    return next()
+  })
 }
 
 module.exports = handleRoutes

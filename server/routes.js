@@ -37,10 +37,11 @@ const handleRoutes = (server) => {
     Numeral.remove({}, (error, numerals) => {
       if (error || numerals.result.n == 0) {
         response.send(500)
+      } else {
+        response.send(200)
       }
     })
 
-    response.send(200)
     return next()
   })
 }

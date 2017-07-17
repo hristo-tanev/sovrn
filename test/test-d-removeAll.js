@@ -3,7 +3,7 @@ let supertest = require('supertest')
 let api = supertest('http://localhost:3000')
 
 const expectStatusToBe = (status, done) => {
-  api.get('/remove/all')
+  api.del('/remove/all')
      .set('Accept', 'application/json')
      .expect(status, done)
 }

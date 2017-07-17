@@ -35,11 +35,9 @@ const handleRoutes = (server) => {
 
   server.get('/remove/all', (request, response, next) => {
     Numeral.remove({}, (error, numerals) => {
-      if (error) {
+      if (error || numerals.result.n === 0) {
         response.send(500)
       }
-
-      console.log(numerals)
     })
 
     response.send(200)
